@@ -35,10 +35,15 @@ def parse_sessions(feed, sessions):
   for session in sessions:
     for argument in session.find_all("tr")[:0:-1]: # pop off the header and invert
       argument_number = argument.a.string
-      if argument_number.endswith("-Orig"):
-        docket_number = "22o" + argument_number.split("-")[0] # magic number for now
+      if "-Orig" in argument_number:
+        # magic docket number for now, see https://www.cocklelegalbriefs.com/blog/supreme-court/the-u-s-supreme-courts-use-of-docket-numbers/
+        docket_number = "22o" + argument_number.split("-")[0]
+      else if  "-Question-" in argument_number:
+        # special case for two-part Obergefell v. Hodges argument
+        docket_number = argument_number.split("-")[0]
       else:
         docket_number = argument_number
+
       argument_id = argument.a['href'].split("/")[-1]
       argument_title = argument.find_all("span")[1].string
       argument_date = parser.parse(argument.find_all("td")[1].string).replace(tzinfo=timezone.utc)
