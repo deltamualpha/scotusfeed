@@ -8,7 +8,7 @@ from datetime import timezone
 def feedbase():
   fg = FeedGenerator()
   fg.load_extension('podcast')
-  fg.title('SCOTUS Audio')
+  fg.title('SCOTUS Audio ' + TERM + 'Term')
   fg.subtitle('This is an automated feed of the mp3 files from the SCOTUS website. NOT AFFILIATED WITH THE COURT OR THE JUSTICES.')
   fg.link(href=LINK, rel='self')
   fg.language('en')
