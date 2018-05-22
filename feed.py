@@ -38,9 +38,9 @@ def parse_sessions(feed, sessions):
       if "-Orig" in argument_number:
         # magic docket number for now, see https://www.cocklelegalbriefs.com/blog/supreme-court/the-u-s-supreme-courts-use-of-docket-numbers/
         docket_number = "22o" + argument_number.split("-")[0]
-      else if  "-Question-" in argument_number:
+      elif "-Question-" in argument_number:
         # special case for two-part Obergefell v. Hodges argument
-        docket_number = argument_number.split("-")[0]
+        docket_number = "-".join(argument_number.split("-")[0:2])
       else:
         docket_number = argument_number
 
